@@ -149,7 +149,7 @@ unsigned int CellsSystem::runMainLoop()
   return 0;
 }
 
-uint CellsSystem::runMainLoop(double endtime)
+unsigned int CellsSystem::runMainLoop(double endtime)
 {
   bool active_run = true;	// Boolean variable that becomes false when a condition stops running
   while(active_run)

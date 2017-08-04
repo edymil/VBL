@@ -1,0 +1,14 @@
+1       #simulation type 1 is full 3d
+1       #initial number of cells
+10      #time steps
+-1      #// precisione relativa
+-1      #delta_vmax
+1e5     #initialization time 
+500000  # simulation duration tmax 5e6 = 1400h
+0       # Massimo CPU time per una frazione di run (s
+0       #step size per slow motion
+0       # flow on off
+0       # radioactive dose
+360     #nprint Numero di passi da " << dt << " secondi tra due record su file
+360     #nscreen
+1       #eventON special events?

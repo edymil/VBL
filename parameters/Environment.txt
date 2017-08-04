@@ -1,0 +1,13 @@
+XMIN		-5000 // µm
+XMAX		5000 // µm
+YMIN		-5000 // µm
+YMAX		5000 // µm
+ZMIN		-15000 // µm
+ZMAX		5000 // µm
+T 			37 // deg C, not used at the moment
+G			0.9e-4 // pg/µm3, glucose concentration of culture well, 10 times less
+O2 			7e-7 // pg/µm-3, oxygen at atmopheric pressure, 10 times less
+CO2			3.4e-7 // pg/µm3, not used at the moment
+A			0.4e-4 // pg/µm3, concentration of amino acids.... nutrients --> dna syntesis, 10 times less
+AcL			0. // pg/µm3, lactate ion
+DoseRate	0. // Gy/s, radiation delivery, background radioactivity, cellular death

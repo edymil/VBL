@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(particleBasedTumor)
+project(VBL)
 set(CMAKE_CXX_STANDARD 11) # C++11...
 ### compiler
 message("CMAKE_CXX_COMPILER:        ${CMAKE_CXX_COMPILER}")

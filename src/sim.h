@@ -88,27 +88,32 @@ const double Gibbs_ATP = 3.1e4;		// energia libera di Gibbs per l'idrolisi dell'
 // coefficienti di diffusione in acqua e negli spazi extracellulari: DA RICONTROLLARE CON ATTENZIONE!!!
 
 const double Diff_W_G = 7.e2;          // coefficiente di diffusione del glucosio in acqua in micron^2/s
-const double Diff_BV_G = Diff_W_G;	   // the diffusion coefficient within blood vessels
 const double Diff_ES_G = 2.e2;         // coefficiente di diffusione del glucosio negli spazi extracellulari in micron^2/s
-const double Diff_Env_G = Diff_ES_G;
+const double Diff_Env_G = Diff_ES_G;   // the diffusion coefficient in the environment is 
+									   // equal to that in the extracellular spaces in
+									   // this simulation (same below)
+const double Diff_BV_G = Diff_W_G;	   // the diffusion coefficient within blood vessels 
+									   // is the same as in water in this simulation 
+									   // (same below)
+
 const double Diff_W_A = 3.e2;          // coefficiente di diffusione della glutammina in acqua in micron^2/s
 const double Diff_BV_A = Diff_W_A;
-// const double Diff_ES_A = 3.e2;      // coefficiente di diffusione della glutammina negli spazi extracellulari in micron^2/s
 const double Diff_ES_A = 7.e1;         // coefficiente di diffusione della glutammina negli spazi extracellulari in micron^2/s
 const double Diff_Env_A = Diff_ES_A;
 
 const double Diff_W_AcL = 3.e2;		// coefficiente di diffusione dell'acido lattico in acqua in micron^2/s
 const double Diff_BV_AcL = Diff_W_AcL;
-// const double Diff_ES_AcL = 3.e2;	// coefficiente di diffusione dell'acido lattico negli spazi extracellulari in micron^2/s
 const double Diff_ES_AcL = 1.4e1;      // coefficiente di diffusione dell'acido lattico negli spazi extracellulari in micron^2/s
 const double Diff_Env_AcL = Diff_ES_AcL;
+
 const double Diff_W_O2 = 3.2e3;		// coefficiente di diffusione dell'ossigeno in acqua in micron^2/s
 const double Diff_BV_O2 = Diff_W_O2;
-//const double Diff_ES_O2 = 3.2e3;     // coefficiente di diffusione dell'ossigeno nelle cellule in micron^2/s
 const double Diff_ES_O2 = 7e1;         // coefficiente di diffusione dell'ossigeno nelle cellule in micron^2/s
 const double Diff_Env_O2 = Diff_ES_O2;
+
 const double Diff_W_H = 7e3;           // coefficiente di diffusione dei protoni in acqua in micron^2/s
 const double Diff_ES_H = 7e3;          // coefficiente di diffusione dei protoni negli spazi extracellulari in micron^2/s
+
 // const double DiffCO2 = 2.2e3;		// coefficiente di diffusione dell'anidride carbonica sia nel mezzo nutritivo che nelle cellule in micron^2/s
 
 
@@ -182,8 +187,8 @@ const double AcL_ENV = 0.;             // pg*micron^-3 concentrazione esterna de
 const double STOCK_MAX = 0.018;		// pg contenuto massimo dello stock di glucosio per cellula
 const double BufCapEnv = 0.19953e-3;   // buffering capacity dell'ambiente (pg/micron^3)
 const double DOSERATE_ENV = 0;         // radiazione ambientale (Gy/s)
-//const double VISCOSITY_ENV = 7e5;	// pg*(micron s^2)*s viscosita' dell'ambiente acquoso a 310 K 
-const double VISCOSITY_ENV = 1.e9;     // pg*(micron s^2)*s viscosita' dell'ambiente 
+
+const double VISCOSITY_ENV = 2.e11;     // pg/(micron s) viscosita' dell'ambiente (test di viscosità ambientale molto elevata, uguale a quella cellulare)
 
 
 const int MAXREPEATS = 10000;                // numero max di ripetizioni del metodo di diffusione

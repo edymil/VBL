@@ -18,7 +18,7 @@
 #include "CellsSystem.h"
 #include "Utilities.h"
 
-uint CellsSystem::runMainLoop()
+unsigned int CellsSystem::runMainLoop()
 {
   bool active_run = true;	// Boolean variable that becomes false when a condition stops running
   while(active_run)

@@ -708,8 +708,8 @@ void StepStat( bool reset_stat );
 
 //****************************************************************************************************
 
-uint runMainLoop( double dt);
-uint runMainLoop( );
+unsigned int runMainLoop( double dt);
+unsigned int runMainLoop( );
 
 // *** metodi per la gestione della parte biofisica *** 
 

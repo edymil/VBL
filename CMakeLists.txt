@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 project(VBL)
-set(CMAKE_CXX_STANDARD 11) # C++11...
+# c++ 11 for newer cmake
+set(CMAKE_CXX_STANDARD 11)
+#always use new c++11 the old way
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
 ### it is NOT elegant, but we do not know how to handle gmp on mac, 
 ### we set the compiler flags manually there

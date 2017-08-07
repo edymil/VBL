@@ -16,13 +16,23 @@ double pAlt;        // Probability of the special event "transition to the alter
 /** see http://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution
  * to create random numbers with c++11
  */
-std::random_device rd;  //Will be used to obtain a seed for the random number engine
-std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
-std::uniform_real_distribution<> dis(0, 1);
+#ifdef OLD_RANDOM
+  
+#else
+  //from http://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution
+  std::random_device rd;  //Will be used to obtain a seed for the random number engine
+  std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+  std::uniform_real_distribution<> dis(0, 1);
+#endif
 
 double ran2(int &idum)
 {
-   return dis(gen);
+#ifdef OLD_RANDOM
+  std::srand(std::time(0));
+  return (double)(std::rand()/RAND_MAX);
+#else
+  return dis(gen);
+#endif
 }
 
 double gammln(const double xx)

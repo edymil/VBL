@@ -194,7 +194,7 @@ const double VISCOSITY_ENV = 2.e11;     // pg/(micron s) viscosita' dell'ambient
 const int MAXREPEATS = 10000;                // numero max di ripetizioni del metodo di diffusione
 const int NCONV_TEST = 12;                  // numero di tests di convergenza (v. CellSystem-B)
 
-const int TOL = 1e-7;                       // tolleranza minima (in pg) sulla determinazione della quantità di sostanze che determinano la condizione di stop del loop in CellSystem::Diff
+const double TOL = 1e-7;                       // tolleranza minima (in pg) sulla determinazione della quantità di sostanze che determinano la condizione di stop del loop in CellSystem::Diff
 //const int TOL = 0.;                       // tolleranza minima (in pg) sulla determinazione della quantità di sostanze che determinano la condizione di stop del loop in CellSystem::Diff
 
 

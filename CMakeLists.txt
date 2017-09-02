@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(VBL)
+
 ###############  set up spack stuff  ##############
 
 # enable @rpath in the install name for any shared library being built
@@ -25,8 +26,6 @@ SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 LIST(FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES "${CMAKE_INSTALL_PREFIX}/lib" isSystemDir)
 IF("${isSystemDir}" STREQUAL "-1")
    SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
-   #this one is needed for the project itself
-   #SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/milotti_mts/lib")
 ENDIF("${isSystemDir}" STREQUAL "-1")
 
 # Include all the transitive dependencies determined by Spack.
@@ -40,28 +39,24 @@ set(CMAKE_CXX_STANDARD 11)
 #always use new c++11 the old way
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
-### it is NOT elegant, but we do not know how to handle gmp on mac, 
-### we set the compiler flags manually there
 ### check if apple
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(APPLE TRUE)
     message("Your are using an apple PC.")
 endif()
+
 ### compiler
 message("CMAKE_CXX_COMPILER:        ${CMAKE_CXX_COMPILER}")
 message("CMAKE_CXX_COMPILER_ID:     ${CMAKE_CXX_COMPILER_ID}")
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   message("using GNU build system")
-
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frounding-math")
-  if(${APPLE})
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -DNDEBUG ")
-  endif()
-
 endif()
-### Boost
-find_package(Boost REQUIRED COMPONENTS "thread")
-set(myLibs "${myLibs};${Boost_THREAD_LIBRARY}")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -DNDEBUG ")
+
+set(myIncs "")
+set(myLibs "")
 
 ### OPENMP
 find_package(OpenMP REQUIRED)
@@ -79,25 +74,36 @@ else()
   message(FATAL_ERROR "OpenMP stuff is not found, but labeled as found")
 endif()
 
-### CGAL
-find_package(CGAL REQUIRED)
-if(CGAL_FOUND)
-  message("Found CGAL_LIBRARY: ${CGAL_LIBRARY})")
-  set(myLibs "${myLibs};${CGAL_LIBRARY}" )
-endif()
+### Boost
+execute_process(COMMAND bash -c "/Users/spack/spack/bin/spack location -i boost" COMMAND tr -d '\n'  OUTPUT_VARIABLE BOOST_ROOT)
+message("Boost directory ${BOOST_ROOT}")
+set(LIBS "${BOOST_ROOT}/lib")
+set(INCS "${BOOST_ROOT}/include")
 
 ### GMP
-find_package(GMP REQUIRED)
-if(GMP_FOUND)
-  message("Found GMP_LIBRARY: ${GMP_LIBRARY})")
-  set(myLibs "${myLibs};${GMP_LIBRARY}" )
-endif()
+execute_process(COMMAND bash -c "/Users/spack/spack/bin/spack location -i gmp" COMMAND tr -d '\n'  OUTPUT_VARIABLE GMP_ROOT)
+message("GMP directory ${GMP_ROOT}")
+set(LIBS "${LIBS};${GMP_ROOT}/lib")
+set(INCS "${INCS};${GMP_ROOT}/include")
 
+### MPFR
+execute_process(COMMAND bash -c "/Users/spack/spack/bin/spack location -i mpfr" COMMAND tr -d '\n'  OUTPUT_VARIABLE MPFR_ROOT)
+message("MPFR directory ${MPFR_ROOT}")
+set(LIBS "${LIBS};${MPFR_ROOT}/lib")
+set(INCS "${INCS};${MPFR_ROOT}/include")
+
+### CGAL
+execute_process(COMMAND bash -c "/Users/spack/spack/bin/spack location -i cgal" COMMAND tr -d '\n'  OUTPUT_VARIABLE CGAL_ROOT)
+message("CGAL directory ${CGAL_ROOT}")
+set(LIBS "${LIBS};${CGAL_ROOT}/lib")
+set(INCS "${INCS};${CGAL_ROOT}/include")
 
 ### cmake debug output CMAKE_EXE_LINKER_FLAGS
 message("set content of mylib: ${myLibs}")
-message("set comiler flags: ${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I${INCS} -L${LIBS} -lboost-thread-mt -lgmp -lgmpxx -lmpfr")
+message("CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 message("CMAKE_EXE_LINKER_FLAGS: ${CMAKE_EXE_LINKER_FLAGS}")
 
 
 add_subdirectory(src)
+

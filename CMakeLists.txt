@@ -55,13 +55,10 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frounding-math")
   if(${APPLE})
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -DNDEBUG -I/opt/local/include -I/usr/local/include -L/opt/local/lib -lgmpxx -lmpfr -lgmp ")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -DNDEBUG -lgmpxx -lmpfr -lgmp ")
   endif()
 
 endif()
-### Boost
-find_package(Boost REQUIRED COMPONENTS "thread")
-set(myLibs "${myLibs};${Boost_THREAD_LIBRARY}")
 
 ### OPENMP
 find_package(OpenMP REQUIRED)
@@ -78,6 +75,11 @@ if (OPENMP_FOUND)
 else()
   message(FATAL_ERROR "OpenMP stuff is not found, but labeled as found")
 endif()
+
+### Boost
+find_package(Boost REQUIRED COMPONENTS "thread")
+set(myLibs "${myLibs};${Boost_THREAD_LIBRARY}")
+
 
 ### CGAL
 find_package(CGAL REQUIRED)

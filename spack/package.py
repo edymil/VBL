@@ -53,6 +53,8 @@ class Vbl(CMakePackage):
     version('develop', git='https://github.com/edymil/VBL',branch='master')
     depends_on('cgal')
     depends_on('boost')
+    depends_on('mpfr')
+    depends_on('gmp')
 
     def cmake_args(self):
         args = ['-DCMAKE_BUILD_TYPE=Release',]
@@ -61,4 +63,4 @@ class Vbl(CMakePackage):
         cmake('..',*std_cmake_args)
         # FIXME: Unknown build system
         make()
-    #    make('install')
+    	make('install')

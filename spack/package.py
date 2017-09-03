@@ -50,14 +50,15 @@ class Vbl(CMakePackage):
     url      = "https://github.com/edymil/VBL/archive/master.zip"
 
     # version('2014-10-08', git='https://github.com/example-project/example.git',commit='9d38cd4e2c94c3cea97d0e2924814acc')
-    version('develop', git='https://github.com/thierry3000/VBL.git',branch='master')
+    version('develop', git='https://github.com/edymil/VBL',branch='master')
     depends_on('cgal')
     depends_on('boost')
 
     def cmake_args(self):
         args = ['-DCMAKE_BUILD_TYPE=Release',]
         return args
-    #def install(self, spec, prefix):
+    def install(self, spec, prefix):
+        cmake('..',*std_cmake_args)
         # FIXME: Unknown build system
-        # make()
+        make()
     #    make('install')

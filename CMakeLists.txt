@@ -76,10 +76,30 @@ else()
   message(FATAL_ERROR "OpenMP stuff is not found, but labeled as found")
 endif()
 
+### GMP
+#set(myLibs "${myLibs};gmp")
+find_package(GMP REQUIRED)
+if(GMP_FOUND)
+  message("Found GMP_LIBRARY: ${GMP_LIBRARY})")
+  set(myLibs "${myLibs};${GMP_LIBRARY}" )
+else()
+  message(FATAL_ERROR "GMP stuff is not found, but labeled as found")
+endif()
+
+
+### MPFR
+#set(myLibs "${myLibs};mpfr")
+find_package(MPFR REQUIRED)
+if(MPFR_FOUND)
+  message("Found MPFR_LIBRARY: ${MPFR_LIBRARY})")
+  set(myLibs "${myLibs};${MPFR_LIBRARY}" )
+else()
+  message(FATAL_ERROR "MPFR stuff is not found, but labeled as found")
+endif()
+
 ### Boost
 find_package(Boost REQUIRED COMPONENTS "thread")
 set(myLibs "${myLibs};${Boost_THREAD_LIBRARY}")
-
 
 ### CGAL
 find_package(CGAL REQUIRED)
@@ -88,8 +108,6 @@ if(CGAL_FOUND)
   set(myLibs "${myLibs};${CGAL_LIBRARY}" )
 endif()
 
-### GMP
-set(myLibs "${myLibs};gmp")
 
 ### cmake debug output CMAKE_EXE_LINKER_FLAGS
 message("set content of mylib: ${myLibs}")

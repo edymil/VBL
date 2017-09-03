@@ -51,10 +51,10 @@ class Vbl(CMakePackage):
 
     # version('2014-10-08', git='https://github.com/example-project/example.git',commit='9d38cd4e2c94c3cea97d0e2924814acc')
     version('develop', git='https://github.com/edymil/VBL',branch='master')
-    depends_on('cgal')
-    depends_on('boost')
     depends_on('mpfr')
     depends_on('gmp')
+    depends_on('boost')
+    depends_on('cgal')
 
     def cmake_args(self):
         args = ['-DCMAKE_BUILD_TYPE=Release',]

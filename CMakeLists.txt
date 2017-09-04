@@ -76,6 +76,11 @@ else()
   message(FATAL_ERROR "OpenMP stuff is not found, but labeled as found")
 endif()
 
+### Boost
+find_package(Boost REQUIRED COMPONENTS "thread")
+set(myLibs "${myLibs};${Boost_THREAD_LIBRARY}")
+message("Boost_THREAD_LIBRARY library: ${Boost_THREAD_LIBRARY}")
+
 ### GMP
 #set(myLibs "${myLibs};gmp")
 find_library(GMP_LIBRARY gmp)
@@ -96,7 +101,7 @@ if(MPFR_FOUND)
   message("Found MPFR_LIBRARY: ${MPFR_LIBRARY})")
   set(myLibs "${myLibs};${MPFR_LIBRARY}" )
 else()
-  message("MPFR library: ${MPFR_LIBRARY}")
+  message("MPFR library: ${GMP_LIBRARY}")
   message(FATAL_ERROR "MPFR stuff is not found, but labeled as found")
 endif()
 

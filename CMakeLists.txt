@@ -84,30 +84,26 @@ message("Boost_THREAD_LIBRARY library: ${Boost_THREAD_LIBRARY}")
 ### GMP
 #set(myLibs "${myLibs};gmp")
 find_library(GMP_LIBRARY gmp)
-if(GMP_FOUND)
-  message("Found GMP_LIBRARY: ${GMP_LIBRARY})")
+#if(GMP_FOUND)
+#  message("Found GMP_LIBRARY: ${GMP_LIBRARY})")
   set(myLibs "${myLibs};${GMP_LIBRARY}" )
-else()
+#else()
   message("GMP library: ${GMP_LIBRARY}")
-  message(FATAL_ERROR "GMP stuff is not found, but labeled as found")
-endif()
+#  message(FATAL_ERROR "GMP stuff is not found, but labeled as found")
+#endif()
 
 
 ### MPFR
 #set(myLibs "${myLibs};mpfr")
 # find_package(MPFR REQUIRED)
 find_library(MPFR_LIBRARY gmp)
-if(MPFR_FOUND)
+#if(MPFR_FOUND)
   message("Found MPFR_LIBRARY: ${MPFR_LIBRARY})")
   set(myLibs "${myLibs};${MPFR_LIBRARY}" )
-else()
+#else()
   message("MPFR library: ${GMP_LIBRARY}")
-  message(FATAL_ERROR "MPFR stuff is not found, but labeled as found")
-endif()
-
-### Boost
-find_package(Boost REQUIRED COMPONENTS "thread")
-set(myLibs "${myLibs};${Boost_THREAD_LIBRARY}")
+#  message(FATAL_ERROR "MPFR stuff is not found, but labeled as found")
+#endif()
 
 ### CGAL
 find_package(CGAL REQUIRED)
@@ -118,8 +114,8 @@ endif()
 
 
 ### cmake debug output CMAKE_EXE_LINKER_FLAGS
-message("set content of mylib: ${myLibs}")
-message("set comiler flags: ${CMAKE_CXX_FLAGS}")
+message("myLibs: ${myLibs}")
+message("compiler flags: ${CMAKE_CXX_FLAGS}")
 message("CMAKE_EXE_LINKER_FLAGS: ${CMAKE_EXE_LINKER_FLAGS}")
 
 

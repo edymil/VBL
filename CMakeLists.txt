@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1)
 project(VBL)
 ###############  set up spack stuff  ##############
 
@@ -82,28 +82,36 @@ set(myLibs "${myLibs};${Boost_THREAD_LIBRARY}")
 message("Boost_THREAD_LIBRARY library: ${Boost_THREAD_LIBRARY}")
 
 ### GMP
-#set(myLibs "${myLibs};gmp")
-find_library(GMP_LIBRARY gmp)
-#if(GMP_FOUND)
-#  message("Found GMP_LIBRARY: ${GMP_LIBRARY})")
-  set(myLibs "${myLibs};${GMP_LIBRARY}" )
-#else()
-  message("GMP library: ${GMP_LIBRARY}")
-#  message(FATAL_ERROR "GMP stuff is not found, but labeled as found")
-#endif()
+##set(myLibs "${myLibs};gmp")
+#find_library(GMP_LIBRARY gmp)
+##if(GMP_FOUND)
+##  message("Found GMP_LIBRARY: ${GMP_LIBRARY})")
+#  set(myLibs "${myLibs};${GMP_LIBRARY}" )
+##else()
+#  message("GMP library: ${GMP_LIBRARY}")
+##  message(FATAL_ERROR "GMP stuff is not found, but labeled as found")
+##endif()
 
+### GMP
+### added FindGMP.cmake to this project!
+message("CMAKE_ROOT: ${CMAKE_ROOT}")
+message("CMAKE_MODULE_PATH: ${CMAKE_MODULE_PATH}")
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/;")
+message("CMAKE_MODULE_PATH: ${CMAKE_MODULE_PATH}")
+find_package(GMP)#provides variables ${GMP_LIBRARIES} and ${GMPXX_LIBRARIES}
+set(myLibs "${myLibs};${GMP_LIBRARIES};${GMPXX_LIBRARIES}")
 
 ### MPFR
-#set(myLibs "${myLibs};mpfr")
-# find_package(MPFR REQUIRED)
-find_library(MPFR_LIBRARY gmp)
-#if(MPFR_FOUND)
-  message("Found MPFR_LIBRARY: ${MPFR_LIBRARY})")
-  set(myLibs "${myLibs};${MPFR_LIBRARY}" )
-#else()
-  message("MPFR library: ${GMP_LIBRARY}")
-#  message(FATAL_ERROR "MPFR stuff is not found, but labeled as found")
-#endif()
+##set(myLibs "${myLibs};mpfr")
+## find_package(MPFR REQUIRED)
+#find_library(MPFR_LIBRARY gmp)
+##if(MPFR_FOUND)
+#  message("Found MPFR_LIBRARY: ${MPFR_LIBRARY})")
+#  set(myLibs "${myLibs};${MPFR_LIBRARY}" )
+##else()
+#  message("MPFR library: ${GMP_LIBRARY}")
+##  message(FATAL_ERROR "MPFR stuff is not found, but labeled as found")
+##endif()
 
 ### CGAL
 find_package(CGAL REQUIRED)

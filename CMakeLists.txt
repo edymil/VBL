@@ -81,6 +81,13 @@ find_package(Boost REQUIRED COMPONENTS "thread")
 set(myLibs "${myLibs};${Boost_THREAD_LIBRARY}")
 message("Boost_THREAD_LIBRARY library: ${Boost_THREAD_LIBRARY}")
 
+### CGAL
+find_package(CGAL REQUIRED)
+if(CGAL_FOUND)
+  message("Found CGAL_LIBRARY: ${CGAL_LIBRARY})")
+  set(myLibs "${myLibs};${CGAL_LIBRARY}" )
+endif()
+
 ### GMP
 ##set(myLibs "${myLibs};gmp")
 #find_library(GMP_LIBRARY gmp)
@@ -112,13 +119,6 @@ set(myLibs "${myLibs};${GMP_LIBRARIES};${GMPXX_LIBRARIES}")
 #  message("MPFR library: ${GMP_LIBRARY}")
 ##  message(FATAL_ERROR "MPFR stuff is not found, but labeled as found")
 ##endif()
-
-### CGAL
-find_package(CGAL REQUIRED)
-if(CGAL_FOUND)
-  message("Found CGAL_LIBRARY: ${CGAL_LIBRARY})")
-  set(myLibs "${myLibs};${CGAL_LIBRARY}" )
-endif()
 
 
 ### cmake debug output CMAKE_EXE_LINKER_FLAGS

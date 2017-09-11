@@ -89,7 +89,7 @@ if(CGAL_FOUND)
 endif()
 
 execute_process(COMMAND bash -c "/Users/spack/spack/bin/spack location -i cgal" COMMAND tr -d '\n'  OUTPUT_VARIABLE CGAL_ROOT)
-include("${CGAL_ROOT}/lib/CGAL/FindGMP.cmake")
+include("${CGAL_ROOT}/lib/CGAL/FindGMP")
 
 ### MPFR
 ##set(myLibs "${myLibs};mpfr")

@@ -88,27 +88,8 @@ if(CGAL_FOUND)
   set(myLibs "${myLibs};${CGAL_LIBRARY}" )
 endif()
 
-### GMP
-##set(myLibs "${myLibs};gmp")
-#find_library(GMP_LIBRARY gmp)
-##if(GMP_FOUND)
-##  message("Found GMP_LIBRARY: ${GMP_LIBRARY})")
-#  set(myLibs "${myLibs};${GMP_LIBRARY}" )
-##else()
-#  message("GMP library: ${GMP_LIBRARY}")
-##  message(FATAL_ERROR "GMP stuff is not found, but labeled as found")
-##endif()
-
-### GMP
-### added FindGMP.cmake to this project!
-message("CMAKE_ROOT: ${CMAKE_ROOT}")
-message("CMAKE_MODULE_PATH: ${CMAKE_MODULE_PATH}")
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/;")
-message("CMAKE_MODULE_PATH: ${CMAKE_MODULE_PATH}")
-find_package(GMP)#provides variables ${GMP_LIBRARIES} and ${GMPXX_LIBRARIES}
-set(myLibs "${myLibs};${GMP_LIBRARIES};${GMPXX_LIBRARIES}")
-message("GMP libraries: ${GMP_LIBRARIES}")
-message("GMPXX libraries: ${GMPXX_LIBRARIES}")
+execute_process(COMMAND bash -c "/Users/spack/spack/bin/spack location -i cgal" COMMAND tr -d '\n'  OUTPUT_VARIABLE CGAL_ROOT)
+include("${CGAL_ROOT}/lib/CGAL/FindGMP.cmake")
 
 ### MPFR
 ##set(myLibs "${myLibs};mpfr")

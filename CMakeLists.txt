@@ -107,6 +107,8 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/;")
 message("CMAKE_MODULE_PATH: ${CMAKE_MODULE_PATH}")
 find_package(GMP)#provides variables ${GMP_LIBRARIES} and ${GMPXX_LIBRARIES}
 set(myLibs "${myLibs};${GMP_LIBRARIES};${GMPXX_LIBRARIES}")
+message("GMP libraries: ${GMP_LIBRARIES}")
+message("GMPXX libraries: ${GMPXX_LIBRARIES}")
 
 ### MPFR
 ##set(myLibs "${myLibs};mpfr")

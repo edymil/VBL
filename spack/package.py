@@ -45,7 +45,7 @@ from spack import *
 
 
 class Vbl(CMakePackage):
-    """FIXME: Put a proper description of your package here."""
+    """Virtual biology lab -- simulation of multicellular tumor spheroids"""
     homepage = "http://http://vbl.ts.infn.it/SiteVBL/index.html"
     url      = "https://github.com/edymil/VBL/archive/master.zip"
 
